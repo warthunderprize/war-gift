@@ -270,29 +270,34 @@
         <small>Акция ограничена: первые 50000 игроков</small>
     </div>
 
-    <script>
-        var countDownDate = new Date().getTime() + 90000000; // +2 часа
+   <script>
+    // Устанавливаем дату окончания: текущее время + 25 часов
+    var countDownDate = new Date().getTime() + 90000000; // 25 часов
+    
+    var x = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
         
-        var x = setInterval(function() {
-            var now = new Date().getTime();
-            var distance = countDownDate - now;
-            
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById("timer").innerHTML = 
-                (hours < 10 ? '0' + hours : hours) + ':' +
-                (minutes < 10 ? '0' + minutes : minutes) + ':' +
-                (seconds < 10 ? '0' + seconds : seconds);
-            
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("timer").innerHTML = "АКЦИЯ ЗАВЕРШЕНА";
-            }
-        }, 1000);
-    </script>
+        // Расчёт часов, минут, секунд
+        var hours = Math.floor(distance / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Вывод с ведущими нулями
+        document.getElementById("timer").innerHTML = 
+            (hours < 10 ? '0' + hours : hours) + ':' +
+            (minutes < 10 ? '0' + minutes : minutes) + ':' +
+            (seconds < 10 ? '0' + seconds : seconds);
+        
+        // Если таймер закончился
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("timer").innerHTML = "АКЦИЯ ЗАВЕРШЕНА";
+        }
+    }, 1000);
+</script>
 </body>
 </html>
+
 
 
