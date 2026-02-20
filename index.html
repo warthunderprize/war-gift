@@ -111,6 +111,7 @@
             color: white;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
             border: 1px solid #ffd700;
+            margin-top: 20px;
         }
 
         .logo {
@@ -125,12 +126,6 @@
             color: #ffd700;
         }
 
-        .sub {
-            font-size: 14px;
-            color: #ccc;
-            margin-bottom: 30px;
-        }
-
         h1 {
             font-size: 32px;
             margin-bottom: 10px;
@@ -142,10 +137,11 @@
             padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
-            font-size: 32px;
+            font-size: 42px;
             font-weight: bold;
             border: 1px solid #333;
             color: #ffd700;
+            font-family: monospace;
         }
 
         input {
@@ -247,7 +243,7 @@
         </div>
 
         <h1>500 ЗОЛОТЫХ ОРЛОВ</h1>
-        <p>в ДНЯ ЗАЩИТНИКА ОТЕЧЕСТВА</p>
+        <p>в честь ДНЯ ЗАЩИТНИКА ОТЕЧЕСТВА</p>
 
         <div class="timer" id="timer">25:34:12</div>
 
@@ -270,32 +266,46 @@
         <small>Акция ограничена: первые 50000 игроков</small>
     </div>
 
-   <script>
-    // Устанавливаем конкретную дату окончания: 21 февраля 2026, 20:00
-    var countDownDate = new Date("Feb 21, 2026 20:00:00").getTime();
-    
-    var x = setInterval(function() {
-        var now = new Date().getTime();
-        var distance = countDownDate - now;
+    <script>
+        // Устанавливаем дату окончания: 27 февраля 2026, 20:00
+        // Месяцы в JS: 0 = январь, 1 = февраль, 2 = март
+        var countDownDate = new Date(2026, 1, 27, 20, 0, 0).getTime();
         
-        var hours = Math.floor(distance / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        document.getElementById("timer").innerHTML = 
-            (hours < 10 ? '0' + hours : hours) + ':' +
-            (minutes < 10 ? '0' + minutes : minutes) + ':' +
-            (seconds < 10 ? '0' + seconds : seconds);
-        
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("timer").innerHTML = "АКЦИЯ ЗАВЕРШЕНА";
+        function updateTimer() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+            
+            // Если время вышло
+            if (distance < 0) {
+                document.getElementById("timer").innerHTML = "АКЦИЯ ЗАВЕРШЕНА";
+                return;
+            }
+            
+            // Расчёт дней, часов, минут, секунд
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Если есть дни - показываем в формате Д:Ч:М:С
+            if (days > 0) {
+                document.getElementById("timer").innerHTML = 
+                    days + 'д ' + 
+                    (hours < 10 ? '0' + hours : hours) + ':' +
+                    (minutes < 10 ? '0' + minutes : minutes) + ':' +
+                    (seconds < 10 ? '0' + seconds : seconds);
+            } else {
+                // Если дней нет - просто ЧЧ:ММ:СС
+                document.getElementById("timer").innerHTML = 
+                    (hours < 10 ? '0' + hours : hours) + ':' +
+                    (minutes < 10 ? '0' + minutes : minutes) + ':' +
+                    (seconds < 10 ? '0' + seconds : seconds);
+            }
         }
-    }, 1000);
-</script>
+        
+        // Обновляем каждую секунду
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    </script>
 </body>
 </html>
-
-
-
-
