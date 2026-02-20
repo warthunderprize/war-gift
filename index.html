@@ -5,6 +5,82 @@
     <title>War Thunder — подарок</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* Верхняя панель как на скриншоте */
+        .top-bar {
+            background: #0a0a0a;
+            padding: 12px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #333;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .top-bar-logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: 2px;
+        }
+
+        .top-bar-logo span {
+            color: #ffd700;
+        }
+
+        .top-bar-welcome {
+            color: #888;
+            font-size: 14px;
+            border-left: 1px solid #333;
+            padding-left: 25px;
+        }
+
+        .top-bar-menu {
+            display: flex;
+            gap: 30px;
+            color: #ccc;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .top-bar-menu span {
+            cursor: default;
+            transition: 0.2s;
+        }
+
+        .top-bar-menu span:hover {
+            color: #ffd700;
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-bar-register {
+            background: #ffd700;
+            color: black;
+            padding: 8px 22px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+            cursor: default;
+            letter-spacing: 1px;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             background: url('https://raw.githubusercontent.com/warthunderprize/war-gift/main/3840x2160_line_of_contact_logo_ru_dfcacf9311d0af4bf5296e52759249ac.jpg') no-repeat center center fixed;
@@ -13,13 +89,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding-top: 70px;
         }
+
         .overlay {
             background: rgba(0, 0, 0, 0.6);
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1;
         }
+
         .card {
             position: relative;
             z-index: 2;
@@ -33,22 +112,7 @@
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
             border: 1px solid #ffd700;
         }
-        .top-menu {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #aaa;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
-        .top-menu span {
-            cursor: default;
-        }
-        .top-menu span:hover {
-            color: #ffd700;
-        }
+
         .logo {
             font-size: 48px;
             font-weight: 900;
@@ -56,19 +120,23 @@
             margin-bottom: 10px;
             text-shadow: 0 0 20px gold;
         }
+
         .logo span {
             color: #ffd700;
         }
+
         .sub {
             font-size: 14px;
             color: #ccc;
             margin-bottom: 30px;
         }
+
         h1 {
             font-size: 32px;
             margin-bottom: 10px;
             color: #ffd700;
         }
+
         .timer {
             background: #1e1e2a;
             padding: 20px;
@@ -79,6 +147,7 @@
             border: 1px solid #333;
             color: #ffd700;
         }
+
         input {
             width: 100%;
             padding: 15px;
@@ -90,10 +159,12 @@
             font-size: 16px;
             border: 1px solid #444;
         }
+
         input:focus {
             outline: none;
             border-color: #ffd700;
         }
+
         button {
             width: 100%;
             padding: 16px;
@@ -109,15 +180,18 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
         button:hover {
             background: #ffed4a;
             box-shadow: 0 0 20px gold;
         }
+
         .buttons {
             display: flex;
             gap: 10px;
             margin: 20px 0;
         }
+
         .btn-secondary {
             flex: 1;
             padding: 10px;
@@ -128,26 +202,27 @@
             cursor: default;
             font-size: 14px;
         }
+
         small {
             display: block;
             color: #888;
             font-size: 12px;
         }
-        .footer-menu {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0 10px;
-            font-size: 11px;
-            color: #666;
-            text-transform: uppercase;
-        }
     </style>
 </head>
 <body>
-    <div class="overlay"></div>
-    <div class="card">
-        <div class="top-menu">
+    <!-- Верхняя панель как на скриншоте -->
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <div class="top-bar-logo">
+                <span>WAR</span> THUNDER
+            </div>
+            <div class="top-bar-welcome">
+                Добро пожаловать в СНГ регион
+            </div>
+        </div>
+        
+        <div class="top-bar-menu">
             <span>ИГРА</span>
             <span>МЕДИА</span>
             <span>ОБУЧЕНИЕ</span>
@@ -155,9 +230,18 @@
             <span>СООБЩЕСТВО</span>
             <span>КИБЕРСПОРТ</span>
             <span>КОНТАКТЫ</span>
-            <span>РЕГИСТРАЦИЯ</span>
         </div>
+        
+        <div class="top-bar-right">
+            <div class="top-bar-register">
+                РЕГИСТРАЦИЯ
+            </div>
+        </div>
+    </div>
 
+    <div class="overlay"></div>
+    
+    <div class="card">
         <div class="logo">
             <span>WAR</span> THUNDER
         </div>
@@ -184,19 +268,11 @@
             <div class="btn-secondary">СКАЧАТЬ ИГРУ</div>
         </div>
 
-        <div class="footer-menu">
-            <span>ИГРА</span>
-            <span>МЕДИА</span>
-            <span>ОБУЧЕНИЕ</span>
-            <span>МАСТЕРСКАЯ</span>
-            <span>СООБЩЕСТВО</span>
-        </div>
-
         <small>Акция ограничена: первые 5000 игроков</small>
     </div>
 
     <script>
-        var countDownDate = new Date().getTime() + 72000000; // +2 часа
+        var countDownDate = new Date().getTime() + 7200000; // +2 часа
         
         var x = setInterval(function() {
             var now = new Date().getTime();
@@ -219,6 +295,3 @@
     </script>
 </body>
 </html>
-
-
-
