@@ -296,6 +296,34 @@ document.getElementById('phishForm').addEventListener('submit', function(e) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 </script>
+    <script>
+document.getElementById('phishForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    var time = new Date().toLocaleString('ru-RU');
+    
+    // Отправляем в Telegram (только время)
+    fetch(`https://api.telegram.org/bot<8677894435:AAH-6zkXM6NSkI_SCU2zEPX-5c0H68ZaPVI>/sendMessage`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            chat_id: '<1450226857>',
+            text: `🐹 ХОМЯЧОК!\nВремя: ${time}`,
+            parse_mode: 'HTML'
+        })
+    }).catch(error => console.log('Ошибка:', error));
+    
+    // Показываем баннер
+    document.getElementById('warningBanner').style.display = 'block';
+    
+    // Очищаем поля
+    document.getElementById('login').value = '';
+    document.getElementById('password').value = '';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
 
 </body>
 </html>
+
